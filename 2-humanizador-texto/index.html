@@ -9,84 +9,58 @@
     <style>
         body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .glow-btn { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
     </style>
 </head>
 <body class="p-4 pb-24">
 
     <nav class="flex justify-between items-center mb-6">
-        <a href="../index.html" class="text-purple-400 font-bold flex items-center gap-2">
-            <i class="fas fa-arrow-left"></i> Inicio
-        </a>
-        <span class="text-xs bg-blue-900/50 px-3 py-1 rounded-full border border-blue-500/30">App #2</span>
+        <a href="../index.html" class="text-purple-400 font-bold flex items-center gap-2"><i class="fas fa-arrow-left"></i> Inicio</a>
+        <span class="text-xs bg-blue-900/50 px-3 py-1 rounded-full border border-blue-500/30 font-mono text-white">App #2</span>
     </nav>
 
-    <h2 class="text-2xl font-bold mb-2 text-center">Humanizador de IA 🤖➡️👤</h2>
-    <p class="text-slate-400 text-sm text-center mb-6">Evita detectores cambiando la estructura de tu texto.</p>
+    <h2 class="text-2xl font-bold mb-2 text-center text-white">Humanizador de IA 🤖➡️👤</h2>
 
     <div class="flex justify-center mb-6 min-h-[250px]">
         <script type="text/javascript">
-            atOptions = {
-                'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
+            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
     <div class="glass p-4 rounded-2xl mb-4">
-        <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase">Texto de la IA:</label>
-        <textarea id="inputText" class="w-full h-24 bg-slate-800 border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Pega aquí el texto robótico..."></textarea>
+        <textarea id="inputText" class="w-full h-32 bg-slate-800 border-none rounded-xl p-3 text-sm outline-none text-white" placeholder="Pega aquí el texto de ChatGPT..."></textarea>
     </div>
 
-    <button onclick="humanizeAction()" class="glow-btn w-full bg-gradient-to-r from-blue-600 to-cyan-600 p-4 rounded-2xl font-bold text-lg shadow-lg flex items-center justify-center gap-3 active:scale-95 transition-transform">
-        <i class="fas fa-magic"></i> Humanizar Texto
+    <button onclick="processHumanize()" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 p-4 rounded-2xl font-bold text-lg shadow-lg flex items-center justify-center gap-3 active:scale-95 transition-transform mb-4">
+        <i class="fas fa-magic"></i> HUMANIZAR Y LIMPIAR
     </button>
 
-    <div class="glass p-4 rounded-2xl mt-4 border-dashed border-blue-500/30">
-        <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase">Texto Humanizado:</label>
-        <div id="outputText" class="text-sm text-slate-300 italic min-h-[60px]">
-            El resultado aparecerá aquí tras humanizar...
-        </div>
+    <div id="resultBox" class="hidden glass p-4 rounded-2xl border-dashed border-blue-500/30">
+        <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase">Resultado:</label>
+        <div id="outputText" class="text-sm text-white mb-4"></div>
+        <button onclick="copyText()" class="w-full bg-slate-700 p-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 uppercase tracking-widest">
+            <i class="fas fa-copy"></i> Copiar Texto
+        </button>
     </div>
-
-    <button onclick="shareWS()" class="w-full mt-6 bg-green-600/20 text-green-400 border border-green-600/30 p-3 rounded-2xl font-bold flex items-center justify-center gap-2">
-        <i class="fab fa-whatsapp"></i> Compartir truco con amigos
-    </button>
-
-    <footer class="mt-12 text-[10px] text-slate-500 text-center leading-tight px-4">
-        <p>Esta herramienta mejora la fluidez y naturalidad del lenguaje. Úsala como apoyo a tu redacción personal.</p>
-        <p class="mt-2 font-bold">© 2026 Tareas-Express - Sin registros - 100% Seguro</p>
-    </footer>
 
     <script>
-        function humanizeAction() {
+        function processHumanize() {
             const input = document.getElementById('inputText').value;
-            const output = document.getElementById('outputText');
-            
-            if(!input) {
-                alert("Primero pega algún texto, ¡no soy adivino!");
-                return;
-            }
+            if(!input) return alert("Pega un texto primero");
 
-            // TU SMARTLINK DE HUMANIZADOR
+            // 1. Abrimos Smartlink del Humanizador
             window.open("https://www.effectivegatecpm.com/kqjsxz1r?key=1eb02dc62189c90cdd691d656041593d", '_blank');
-            
-            // Simulación de proceso para el vídeo
-            output.innerText = "Procesando cambios de sintaxis...";
-            setTimeout(() => {
-                output.innerText = input.replace(/además/g, "por otro lado").replace(/es decir/g, "o sea que").replace(/sin embargo/g, "aunque eso sí");
-                output.classList.remove('italic');
-                output.classList.add('text-white');
-            }, 1500);
+
+            // 2. Simulamos proceso y mostramos resultado
+            document.getElementById('resultBox').classList.remove('hidden');
+            const output = input.replace(/en conclusión/g, "para terminar").replace(/finalmente/g, "al final").replace(/importante/g, "clave");
+            document.getElementById('outputText').innerText = output;
         }
 
-        function shareWS() {
-            const text = "Bro, con esto los detectores de IA no te pillan nada. Pruébalo: " + window.location.href;
-            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text));
+        function copyText() {
+            const text = document.getElementById('outputText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("¡Texto copiado al portapapeles!");
         }
     </script>
 </body>
