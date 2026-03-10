@@ -3,100 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apuntes a Mano - Tareas-Express</title>
+    <title>Apuntes a Mano | Tareas-Express</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Gloria+Hallelujah&family=Indie+Flower&family=Shadows+Into+Light&display=swap');
-        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
-        .paper { 
-            background-color: #fff; 
+        
+        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; margin: 0; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Estilos de papel y fuentes */
+        .paper-container { background: white; padding: 40px 30px; border-radius: 2px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5); }
+        .paper-lines { 
             color: #1a365d; 
-            line-height: 1.6;
+            line-height: 1.6rem;
             background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
             background-size: 100% 1.6rem;
-            border-radius: 4px;
+            min-height: 400px;
+            font-size: 1.5rem;
+            word-wrap: break-word;
         }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .font-style-1 { font-family: 'Caveat', cursive; }
-        .font-style-2 { font-family: 'Shadows Into Light', cursive; }
-        .font-style-3 { font-family: 'Indie Flower', cursive; }
-        .font-style-4 { font-family: 'Gloria Hallelujah', cursive; }
-        .ad-container { min-height: 250px; background: rgba(255,255,255,0.03); border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(255,255,255,0.1); }
+        
+        /* Clases de fuentes */
+        .f-1 { font-family: 'Caveat', cursive; }
+        .f-2 { font-family: 'Shadows Into Light', cursive; }
+        .f-3 { font-family: 'Indie Flower', cursive; }
+        .f-4 { font-family: 'Gloria Hallelujah', cursive; }
+
+        .btn-font { background: #1e293b; border: 1px solid #334155; padding: 12px; border-radius: 12px; transition: all 0.2s; }
+        .btn-font:active { transform: scale(0.95); background: #7c3aed; }
     </style>
 </head>
-<body class="p-4 pb-24">
+<body class="p-4 pb-32">
 
-    <nav class="flex justify-between items-center mb-4">
-        <a href="../index.html" class="text-purple-400 font-bold flex items-center gap-2 bg-purple-900/20 px-4 py-2 rounded-full border border-purple-500/30">
-            <i class="fas fa-arrow-left"></i> Inicio
+    <nav class="flex justify-between items-center mb-6">
+        <a href="../index.html" class="bg-slate-800 text-purple-400 px-4 py-2 rounded-full text-sm font-bold border border-slate-700">
+            <i class="fas fa-arrow-left mr-2"></i>Inicio
         </a>
         <div class="text-right">
-            <span class="block text-[10px] text-slate-500 uppercase font-black">Herramienta</span>
-            <span class="text-xs font-bold text-white bg-purple-600 px-2 py-0.5 rounded">CALIGRAFÍA IA</span>
+            <p class="text-[10px] text-slate-500 font-bold uppercase">Herramienta Pro</p>
+            <p class="text-xs font-black text-white">CALIGRAFÍA REAL</p>
         </div>
     </nav>
 
-    <header class="text-center mb-6">
-        <h1 class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">PASAR A MANO</h1>
-        <p class="text-slate-400 text-xs">Convierte tus apuntes digitales en folios reales</p>
-    </header>
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-black tracking-tighter italic shadow-sm">PASAR A MANO</h1>
+        <p class="text-slate-400 text-xs">Tus textos digitales, ahora en papel.</p>
+    </div>
 
-    <div class="ad-container mb-8">
+    <div class="flex justify-center mb-8 min-h-[250px] bg-slate-900/50 rounded-2xl items-center border border-dashed border-slate-700">
         <script type="text/javascript">
-            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
+            atOptions = {
+                'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="glass p-5 rounded-3xl mb-6 shadow-xl">
-        <label class="block text-[10px] font-bold text-purple-400 mb-4 uppercase text-center tracking-widest">Elige tu Caligrafía</label>
+    <div class="glass p-5 rounded-3xl mb-6">
+        <p class="text-[10px] font-bold text-slate-400 uppercase mb-4 text-center tracking-widest">Elige tu estilo de letra</p>
         <div class="grid grid-cols-4 gap-3">
-            <button onclick="changeFont('font-style-1')" class="bg-slate-800 border border-slate-700 p-3 rounded-xl text-lg font-style-1 hover:border-purple-500 transition-all focus:ring-2 focus:ring-purple-500">Ab</button>
-            <button onclick="changeFont('font-style-2')" class="bg-slate-800 border border-slate-700 p-3 rounded-xl text-lg font-style-2 hover:border-purple-500 transition-all focus:ring-2 focus:ring-purple-500">Ab</button>
-            <button onclick="changeFont('font-style-3')" class="bg-slate-800 border border-slate-700 p-3 rounded-xl text-lg font-style-3 hover:border-purple-500 transition-all focus:ring-2 focus:ring-purple-500">Ab</button>
-            <button onclick="changeFont('font-style-4')" class="bg-slate-800 border border-slate-700 p-3 rounded-xl text-lg font-style-4 hover:border-purple-500 transition-all focus:ring-2 focus:ring-purple-500">Ab</button>
+            <button onclick="changeF('f-1')" class="btn-font f-1 text-xl">Aa</button>
+            <button onclick="changeF('f-2')" class="btn-font f-2 text-xl">Aa</button>
+            <button onclick="changeF('f-3')" class="btn-font f-3 text-xl">Aa</button>
+            <button onclick="changeF('f-4')" class="btn-font f-4 text-xl">Aa</button>
         </div>
     </div>
 
     <div class="glass p-4 rounded-3xl mb-6">
-        <textarea id="inputText" class="w-full h-32 bg-transparent border-none text-white text-sm outline-none resize-none" placeholder="Pega aquí el texto de ChatGPT o de tus apuntes..."></textarea>
+        <textarea id="ti" class="w-full h-32 bg-transparent border-none text-white text-sm outline-none resize-none" placeholder="Pega aquí el texto de ChatGPT..."></textarea>
     </div>
 
-    <div id="captureArea" class="mb-8">
-        <div id="paperPreview" class="paper p-10 shadow-2xl min-h-[500px] text-2xl font-style-1">
-            Escribe algo arriba para empezar...
+    <div id="captureArea" class="mb-10">
+        <div class="paper-container">
+            <div id="tp" class="paper-lines f-1">
+                Escribe algo arriba...
+            </div>
         </div>
     </div>
 
     <div class="fixed bottom-6 left-6 right-6">
-        <button onclick="processDownload()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 p-5 rounded-2xl font-black text-lg shadow-2xl shadow-purple-900/40 active:scale-95 transition-all border-b-4 border-purple-800">
-            <i class="fas fa-file-download mr-2"></i> DESCARGAR JPG
+        <button onclick="doDL()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 p-5 rounded-2xl font-black text-lg shadow-2xl active:scale-95 transition-all border-b-4 border-purple-800">
+            <i class="fas fa-file-download mr-2"></i>DESCARGAR FOLIO JPG
         </button>
     </div>
 
     <script>
-        const input = document.getElementById('inputText');
-        const preview = document.getElementById('paperPreview');
+        const ti = document.getElementById('ti');
+        const tp = document.getElementById('tp');
 
-        input.addEventListener('input', (e) => {
-            preview.innerText = e.target.value || "Escribe algo arriba para empezar...";
+        ti.addEventListener('input', (e) => {
+            tp.innerText = e.target.value || "Escribe algo arriba...";
         });
 
-        function changeFont(fontClass) {
-            preview.className = 'paper p-10 shadow-2xl min-h-[500px] text-2xl ' + fontClass;
+        function changeF(c) {
+            tp.className = 'paper-lines ' + c;
         }
 
-        async function processDownload() {
-            if(!input.value) return alert("¡Ey! Primero pega el texto que quieres pasar a mano.");
+        async function doDL() {
+            if(!ti.value) return alert("Pega un texto primero.");
+            
+            // Abrir Smartlink
             window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
+            
+            // Generar JPG
             const canvas = await html2canvas(document.getElementById('captureArea'));
-            const image = canvas.toDataURL("image/jpeg", 0.9);
-            const link = document.createElement('a');
-            link.download = 'mi-tarea-a-mano.jpg';
-            link.href = image;
-            link.click();
+            const img = canvas.toDataURL("image/jpeg", 0.9);
+            const l = document.createElement('a');
+            l.download = 'mi-tarea-express.jpg';
+            l.href = img;
+            l.click();
         }
     </script>
 </body>
