@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Tareas-Express | Kit de Supervivencia Estudiantil</title>
-    <meta name="description" content="La herramienta definitiva para estudiantes: Apuntes a mano, Humanizador IA y Predictor de Exámenes.">
+    <meta name="description" content="La herramienta definitiva para estudiantes: Apuntes a mano, Humanizador IA, Predictor de Exámenes y Escáner Matemático.">
     <meta name="google-site-verification" content="FhFwyv62eHynne7MhU-UK2Uqy9o94JAWaU6_cfD-5YI" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
@@ -20,16 +20,17 @@
         .card-anim { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .card-anim:active { transform: scale(0.96); }
         .gradient-text { background: linear-gradient(90deg, #a78bfa, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .new-badge { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-size: 8px; font-weight: 900; padding: 2px 6px; border-radius: 6px; text-transform: uppercase; }
     </style>
 </head>
-<body class="p-5 max-w-md mx-auto pb-24">
+<body class="p-5 max-w-md mx-auto pb-24 text-sm">
 
-    <header class="flex justify-between items-start mt-4 mb-8">
+    <header class="flex justify-between items-start mt-4 mb-8 px-2">
         <div>
             <h1 class="text-3xl font-black italic tracking-tighter gradient-text leading-none uppercase">Tareas-Express</h1>
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-1">Student Intelligence Hub</p>
+            <p class="text-[9px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-1 italic">Student Intelligence Hub</p>
         </div>
-        <button id="installBtn" class="hidden bg-white text-black px-4 py-2 rounded-full text-[10px] font-black shadow-xl active:scale-90 transition-all border border-white/20">
+        <button id="installBtn" class="hidden bg-white text-black px-4 py-2 rounded-full text-[10px] font-black shadow-xl active:scale-90 transition-all">
             <i class="fas fa-download mr-1"></i> INSTALAR
         </button>
     </header>
@@ -43,12 +44,26 @@
 
     <div class="space-y-4">
         
+        <a href="5-math-visual/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-cyan-500/20">
+            <div class="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-cyan-900/40">
+                <i class="fas fa-bolt text-black"></i>
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center gap-2 mb-0.5">
+                    <h3 class="font-bold text-base text-cyan-100 leading-none">Math-Visual</h3>
+                    <span class="new-badge">HIT</span>
+                </div>
+                <p class="text-slate-400 text-[11px] italic font-medium">Escáner de Mates con AR</p>
+            </div>
+            <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+        </a>
+
         <a href="1-apuntes-a-mano/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-white/5">
             <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-purple-900/40">
                 <i class="fas fa-pen-nib text-white"></i>
             </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base">Apuntes a Mano</h3>
+            <div class="flex-1 text-slate-200">
+                <h3 class="font-bold text-base leading-none mb-1">Apuntes a Mano</h3>
                 <p class="text-slate-400 text-[11px] italic font-medium">Texto a folio real</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
@@ -58,41 +73,39 @@
             <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-blue-900/40">
                 <i class="fas fa-user-check text-white"></i>
             </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base">Humanizador IA</h3>
+            <div class="flex-1 text-slate-200">
+                <h3 class="font-bold text-base leading-none mb-1">Humanizador IA</h3>
                 <p class="text-slate-400 text-[11px] italic font-medium">Bypass Detectores</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
 
-        <a href="3-limpiador-huellas/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-white/5">
-            <div class="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-red-900/40">
-                <i class="fas fa-user-secret text-white"></i>
+        <a href="4-flash-check/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-white/5">
+            <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-amber-900/40">
+                <i class="fas fa-brain text-black"></i>
             </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base">Limpiador Meta</h3>
-                <p class="text-slate-400 text-[11px] italic font-medium">Modo Invisible</p>
+            <div class="flex-1 text-slate-200">
+                <h3 class="font-bold text-base leading-none mb-1">Flash-Check</h3>
+                <p class="text-slate-400 text-[11px] italic font-medium">Predictor de Exámenes</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
 
-        <a href="4-flash-check/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-amber-500/10">
-            <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-amber-900/40">
-                <i class="fas fa-brain text-black"></i>
+        <a href="3-limpiador-huellas/index.html" class="glass card-anim p-4 rounded-[2rem] flex items-center shadow-lg block border border-white/5 opacity-80">
+            <div class="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-xl mr-4 border border-white/5">
+                <i class="fas fa-user-secret text-slate-500"></i>
             </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base text-amber-100">Flash-Check</h3>
-                <p class="text-amber-500/60 text-[11px] italic font-medium">Predictor de Exámenes</p>
+            <div class="flex-1 text-slate-200">
+                <h3 class="font-bold text-sm leading-none mb-1">Limpiador Meta</h3>
+                <p class="text-slate-500 text-[10px] italic">Modo Invisible</p>
             </div>
-            <div class="bg-amber-500/10 p-1 px-2 rounded-lg">
-                <span class="text-[8px] font-black text-amber-500">NEW</span>
-            </div>
+            <i class="fas fa-chevron-right text-slate-700 text-xs"></i>
         </a>
 
     </div>
 
     <footer class="mt-16 text-center opacity-30">
-        <p class="text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+        <p class="text-[9px] font-black uppercase tracking-widest leading-relaxed">
             &copy; 2026 Tareas-Express Official<br>
             Secure Academic Resources
         </p>
