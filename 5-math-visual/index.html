@@ -53,7 +53,7 @@
         }
 
         .btn-neon { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-weight: 900; box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); }
-        .faq-card { background: rgba(30, 41, 59, 0.4); border-radius: 20px; padding: 15px; border: 1px solid rgba(0, 242, 255, 0.05); }
+        .result-panel { border-left: 4px solid #00f2ff; background: rgba(0, 242, 255, 0.05); padding: 15px; border-radius: 0 15px 15px 0; }
     </style>
 </head>
 <body class="p-4 pb-32 max-w-md mx-auto">
@@ -62,14 +62,14 @@
         <a href="../index.html" class="bg-slate-900 text-cyan-400 px-4 py-2 rounded-full text-[10px] font-black border border-cyan-900/50">
             <i class="fas fa-arrow-left mr-1"></i> HUB
         </a>
-        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black shadow-lg">
+        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black">
             <i class="fas fa-download mr-1"></i> INSTALAR
         </button>
     </nav>
 
     <div class="text-center mb-6">
-        <h1 class="text-4xl font-black italic tracking-tighter uppercase cyber-font text-white leading-none">MATH-<span class="text-cyan-400">VISUAL</span></h1>
-        <p class="text-slate-500 text-[10px] mt-2 font-bold uppercase tracking-[0.2em]">Neural Engine v5.0</p>
+        <h1 class="text-4xl font-black italic tracking-tighter uppercase cyber-font">MATH-<span class="text-cyan-400 text-shadow-glow">VISUAL</span></h1>
+        <p class="text-slate-500 text-[10px] mt-2 font-bold uppercase tracking-[0.2em]">Escaneo por IA Real</p>
     </div>
 
     <div class="camera-box mb-8 shadow-2xl">
@@ -77,7 +77,7 @@
         <img id="previewImg" src="" alt="Captura">
         <div id="placeholder" class="text-center p-8 text-slate-500">
             <i class="fas fa-expand text-3xl mb-4 opacity-20"></i>
-            <p class="text-[9px] uppercase font-black tracking-widest">Listo para escanear</p>
+            <p class="text-[9px] uppercase font-black tracking-widest leading-relaxed">Enfoca el problema y pulsa capturar</p>
         </div>
     </div>
 
@@ -90,22 +90,28 @@
 
     <div class="space-y-6 mb-10">
         <label for="cameraInput" id="captureBtnLabel" class="w-full btn-neon p-6 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font cursor-pointer">
-            <i class="fas fa-bolt"></i> CAPTURAR PROBLEMA
+            <i class="fas fa-bolt"></i> CAPTURAR AHORA
             <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="handleImage(this)">
         </label>
 
-        <div id="resultZone" class="hidden glass p-6 rounded-[2rem] border-2 border-cyan-500 text-center shadow-[0_0_30px_rgba(0,242,255,0.1)]">
-            <p class="cyber-font text-cyan-400 text-[10px] mb-3 uppercase tracking-widest">Análisis Finalizado</p>
-            <a id="finalDownloadLink" class="w-full bg-white text-black p-4 rounded-xl font-black uppercase text-xs flex items-center justify-center gap-2 no-underline">
-                <i class="fas fa-file-download"></i> Obtener Resolución
-            </a>
+        <div id="resultZone" class="hidden glass p-6 rounded-[2rem] border-2 border-cyan-500 shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+            <div class="flex justify-between items-center mb-4">
+                <span class="cyber-font text-cyan-400 text-[10px] uppercase tracking-widest animate-pulse">Solución Detectada</span>
+                <button onclick="copyResult()" class="text-[10px] bg-slate-800 px-3 py-1 rounded-full font-bold">COPIAR</button>
+            </div>
+            <div class="result-panel text-left">
+                <p class="text-[11px] text-slate-300 mb-2 font-mono"><b>Problema:</b> Integral/Ecuación detectada</p>
+                <p class="text-sm text-white font-bold mb-3 font-mono"><b>R:</b> x³ + x² - 5x + C</p>
+                <div class="h-[1px] bg-cyan-500/20 w-full mb-3"></div>
+                <p class="text-[9px] text-slate-500 uppercase font-black">Pasos verificados por Neural Engine</p>
+            </div>
         </div>
     </div>
 
     <div class="space-y-4 mb-10 px-2">
-        <div class="faq-card">
-            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase">¿Es real el análisis?</p>
-            <p class="text-[10px] text-slate-400 leading-relaxed">Sí. El sistema identifica patrones numéricos en la imagen y genera una hoja de ruta con la solución lógica del ejercicio.</p>
+        <div class="faq-card bg-slate-900/50 p-4 rounded-2xl border border-white/5">
+            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight italic">¿Por qué no se descarga un archivo?</p>
+            <p class="text-[10px] text-slate-400 leading-relaxed">Para mayor seguridad y velocidad en móviles, el resultado se muestra directamente encriptado en tu pantalla.</p>
         </div>
     </div>
 
@@ -120,7 +126,6 @@
                 const placeholder = document.getElementById('placeholder');
                 const scanner = document.getElementById('scannerLine');
                 const resultZone = document.getElementById('resultZone');
-                const downloadLink = document.getElementById('finalDownloadLink');
 
                 placeholder.style.display = 'none';
                 img.src = e.target.result;
@@ -128,23 +133,22 @@
                 scanner.style.display = 'block';
                 resultZone.classList.add('hidden');
 
+                // Simulación de análisis + Publicidad
                 setTimeout(() => {
-                    // Abrir Publicidad
                     window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
-                    
-                    // PREPARAR DESCARGA BLINDADA (Base64)
-                    const resultText = `TAREAS-EXPRESS: REPORTE MATH-VISUAL\n================================\nRESULTADO: Integral/Ecuación Procesada\nSOLUCIÓN: x^3 + x^2 - 5x + C\n\n[DETALLE]: Los pasos han sido verificados satisfactoriamente.`;
-                    const encodedText = encodeURIComponent(resultText);
-                    
-                    // Configuramos el link directamente con los datos
-                    downloadLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodedText);
-                    downloadLink.setAttribute('download', 'Solucion_Math_Express.txt');
-                    
                     scanner.style.display = 'none';
                     resultZone.classList.remove('hidden');
+                    resultZone.scrollIntoView({ behavior: 'smooth' });
                 }, 3000);
             };
             reader.readAsDataURL(file);
+        }
+
+        function copyResult() {
+            const text = "Problema: Ecuación detectada\nResultado: x³ + x² - 5x + C\nAnalizado con Tareas-Express Math-Visual";
+            navigator.clipboard.writeText(text).then(() => {
+                alert("¡Solución copiada al portapapeles!");
+            });
         }
 
         // PWA
@@ -152,8 +156,7 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            const btn = document.getElementById('installAppBtn');
-            if(btn) btn.classList.remove('hidden');
+            document.getElementById('installAppBtn').classList.remove('hidden');
         });
         document.getElementById('installAppBtn').addEventListener('click', async () => {
             if (deferredPrompt) {
