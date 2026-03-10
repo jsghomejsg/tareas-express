@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol Zero | Escape Room | Tareas-Express</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        body { background-color: #02040a; color: #00f2ff; font-family: 'Orbitron', sans-serif; overflow: hidden; height: 100vh; }
+        
+        .room-container { position: relative; height: 80vh; width: 100%; border: 2px solid #00f2ff22; border-radius: 20px; background: radial-gradient(circle at center, #0a101f 0%, #02040a 100%); overflow: hidden; }
+        
+        /* Objetos Interactivos */
+        .interactive { position: absolute; cursor: pointer; transition: all 0.3s; }
+        .interactive:hover { filter: drop-shadow(0 0 10px #00f2ff); transform: scale(1.05); }
+        
+        .terminal { top: 30%; left: 35%; font-size: 4rem; color: #00f2ff33; }
+        .drawer { bottom: 10%; right: 10%; font-size: 3rem; color: #1e293b; }
+        .vent { top: 10%; right: 20%; font-size: 2.5rem; color: #1e293b; }
+
+        /* Panel de Inventario */
+        .inventory { height: 15vh; background: rgba(15, 23, 42, 0.8); border-top: 2px solid #00f2ff44; display: flex; align-items: center; padding: 0 20px; gap: 15px; }
+        .inv-slot { width: 50px; height: 50px; border: 1px dashed #00f2ff44; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+
+        /* Modales / Puzles */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+        .puzzle-box { background: #0a101f; border: 2px solid #00f2ff; padding: 30px; border-radius: 20px; text-align: center; max-width: 320px; width: 100%; }
+        
+        .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .key-btn { background: #1e293b; padding: 15px; border-radius: 10px; font-weight: bold; border: 1px solid #00f2ff22; }
+        .key-btn:active { background: #00f2ff; color: #000; }
+
+        .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: rgba(0, 242, 255, 0.1); box-shadow: 0 0 10px #00f2ff; animation: scan 4s infinite linear; pointer-events: none; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="p-4">
+
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Nivel 01</span>
+            <h2 class="text-sm font-black italic">PROTOCOL_ZERO</h2>
+        </div>
+        <button onclick="showHint()" class="bg-cyan-900/30 border border-cyan-500/50 text-cyan-400 px-3 py-1 rounded text-[10px] font-bold">PISTA</button>
+    </div>
+
+    <div class="room-container">
+        <div class="scan-line"></div>
+        
+        <div class="interactive terminal" onclick="openKeypad()">
+            <i class="fas fa-microchip"></i>
+            <div class="text-[8px] text-center mt-2 font-black">SISTEMA_BLOQUEADO</div>
+        </div>
+
+        <div class="interactive drawer" id="obj-drawer" onclick="inspectDrawer()">
+            <i class="fas fa-folder-open"></i>
+        </div>
+
+        <div class="interactive vent" onclick="inspectVent()">
+            <i class="fas fa-grip-lines"></i>
+        </div>
+    </div>
+
+    <div class="inventory">
+        <div class="inv-slot" id="slot1"></div>
+        <div class="inv-slot" id="slot2"></div>
+        <p class="text-[8px] text-slate-500 uppercase font-black ml-auto">Data_Cache</p>
+    </div>
+
+    <div class="overlay" id="keypadModal">
+        <div class="puzzle-box">
+            <h3 class="text-xs mb-4">AUTENTICACIÓN REQUERIDA</h3>
+            <div id="display" class="bg-black p-4 mb-4 text-xl tracking-[10px] font-bold h-14 flex items-center justify-center border border-cyan-500/30">____</div>
+            <div class="keypad-grid">
+                <button class="key-btn" onclick="press('1')">1</button>
+                <button class="key-btn" onclick="press('2')">2</button>
+                <button class="key-btn" onclick="press('3')">3</button>
+                <button class="key-btn" onclick="press('4')">4</button>
+                <button class="key-btn" onclick="press('5')">5</button>
+                <button class="key-btn" onclick="press('6')">6</button>
+                <button class="key-btn" onclick="press('7')">7</button>
+                <button class="key-btn" onclick="press('8')">8</button>
+                <button class="key-btn" onclick="press('9')">9</button>
+                <button class="key-btn text-red-500" onclick="resetKeypad()">C</button>
+                <button class="key-btn" onclick="press('0')">0</button>
+                <button class="key-btn text-green-500" onclick="checkCode()">OK</button>
+            </div>
+            <button onclick="closeModals()" class="mt-6 text-[10px] text-slate-500 font-bold underline">CERRAR</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="msgModal">
+        <div class="puzzle-box">
+            <p id="msgContent" class="text-xs leading-relaxed"></p>
+            <button onclick="closeModals()" class="mt-6 bg-cyan-500 text-black px-6 py-2 rounded font-bold text-[10px]">ENTENDIDO</button>
+        </div>
+    </div>
+
+    <script>
+        let inventory = [];
+        let currentCode = "";
+        const correctCode = "1024"; // El código es la potencia de 2 (fácil para empezar)
+
+        function showMsg(text) {
+            document.getElementById('msgContent').innerText = text;
+            document.getElementById('msgModal').style.display = 'flex';
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.overlay').forEach(el => el.style.display = 'none');
+        }
+
+        // Lógica de inspección
+        function inspectDrawer() {
+            if (!inventory.includes('nota')) {
+                inventory.push('nota');
+                document.getElementById('slot1').innerHTML = '<i class="fas fa-sticky-note text-yellow-500"></i>';
+                showMsg("Has encontrado una nota arrugada. Dice: 'El sistema corre sobre 10 bits de memoria'.");
+            } else {
+                showMsg("El cajón está vacío.");
+            }
+        }
+
+        function inspectVent() {
+            showMsg("A través de la rejilla ves unos números grabados en la pared: '_ _ 2 4'.");
+        }
+
+        function openKeypad() {
+            document.getElementById('keypadModal').style.display = 'flex';
+        }
+
+        function press(num) {
+            if (currentCode.length < 4) {
+                currentCode += num;
+                updateDisplay();
+            }
+        }
+
+        function resetKeypad() {
+            currentCode = "";
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('display').innerText = currentCode.padEnd(4, '_');
+        }
+
+        function checkCode() {
+            if (currentCode === correctCode) {
+                showMsg("¡SISTEMA DESBLOQUEADO! Has logrado escapar de la primera terminal. Próximo protocolo: ACTIVADO.");
+                // Aquí iría el paso al Nivel 2
+            } else {
+                alert("ERROR: CÓDIGO INCORRECTO");
+                resetKeypad();
+            }
+        }
+
+        function showHint() {
+            // Aquí irá el anuncio en el futuro
+            alert("PISTA: La nota habla de 10 bits ($2^{10}$) y en la rejilla viste '24'. ¿Qué número falta?");
+        }
+    </script>
+</body>
+</html>
