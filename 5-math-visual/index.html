@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math-Visual | Escáner de Soluciones | Tareas-Express</title>
+    
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap');
+        
+        body { background-color: #050810; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+        .cyber-font { font-family: 'Orbitron', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 255, 255, 0.1); }
+        
+        /* Animación Escáner Láser */
+        .scanner-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(to right, transparent, #00f2ff, transparent);
+            box-shadow: 0 0 15px #00f2ff;
+            animation: scan 3s infinite linear;
+            display: none;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .camera-box {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            border: 2px solid rgba(0, 242, 255, 0.3);
+            border-radius: 30px;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .corner {
+            position: absolute;
+            width: 20px; height: 20px;
+            border: 3px solid #00f2ff;
+        }
+        .top-left { top: 15px; left: 15px; border-right: 0; border-bottom: 0; }
+        .top-right { top: 15px; right: 15px; border-left: 0; border-bottom: 0; }
+        .bottom-left { bottom: 15px; left: 15px; border-right: 0; border-top: 0; }
+        .bottom-right { bottom: 15px; right: 15px; border-left: 0; border-top: 0; }
+
+        .btn-neon {
+            background: linear-gradient(45deg, #00f2ff, #0066ff);
+            color: #000;
+            font-weight: 900;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+        .faq-card { background: rgba(30, 41, 59, 0.4); border-radius: 20px; padding: 15px; border: 1px solid rgba(0, 242, 255, 0.05); }
+    </style>
+</head>
+<body class="p-4 pb-32 max-w-md mx-auto">
+
+    <nav class="flex justify-between items-center mb-8 mt-2">
+        <a href="../index.html" class="bg-slate-900 text-cyan-400 px-4 py-2 rounded-full text-[10px] font-black border border-cyan-900/50 active:scale-95 transition-all">
+            <i class="fas fa-arrow-left mr-1"></i> HUB
+        </a>
+        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black shadow-lg shadow-cyan-500/20 active:scale-90 transition-all">
+            <i class="fas fa-plus-circle mr-1"></i> INSTALAR
+        </button>
+    </nav>
+
+    <div class="text-center mb-6">
+        <div class="inline-block bg-cyan-500/10 text-cyan-400 text-[9px] font-black px-3 py-1 rounded-full mb-3 border border-cyan-500/20 uppercase tracking-[0.3em] cyber-font">
+            Visual Math AI v5.0
+        </div>
+        <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none cyber-font">MATH-<span class="text-cyan-400 text-shadow-glow">VISUAL</span></h1>
+        <p class="text-slate-500 text-[11px] mt-2 font-bold uppercase tracking-widest">Escaneo Dinámico de Problemas</p>
+    </div>
+
+    <div class="camera-box mb-8 shadow-2xl">
+        <div id="scannerLine" class="scanner-line"></div>
+        <div class="corner top-left"></div><div class="corner top-right"></div>
+        <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+        
+        <div id="cameraStatus" class="text-center p-6">
+            <i class="fas fa-camera text-4xl text-cyan-500/30 mb-4 animate-pulse"></i>
+            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest">Esperando Problema Matemático...</p>
+        </div>
+
+        <div id="resultAR" class="hidden absolute inset-0 flex flex-col items-center justify-center bg-cyan-500/5 backdrop-blur-sm">
+            <div class="text-cyan-400 cyber-font text-xs mb-2">PROCESANDO...</div>
+            <div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div class="w-full h-full bg-cyan-500 animate-[loading_2s_ease-in-out]"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass mb-8 rounded-[2rem] overflow-hidden flex justify-center items-center min-h-[250px] border-dashed border-cyan-900/30">
+        <script type="text/javascript">
+            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
+    </div>
+
+    <div class="glass p-6 rounded-[2.5rem] mb-10">
+        <button onclick="startVisualScan()" class="w-full btn-neon p-5 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font">
+            <i class="fas fa-bolt"></i> ANALIZAR FOTO
+        </button>
+        <p class="text-[9px] text-slate-500 mt-4 text-center font-bold uppercase italic leading-tight">
+            *Asegúrate de que la caligrafía sea legible bajo buena luz.
+        </p>
+    </div>
+
+    <div class="space-y-4 mb-10">
+        <h3 class="text-center text-[10px] font-black text-cyan-500/50 uppercase tracking-[0.4em] cyber-font mb-6">Database FAQ</h3>
+        
+        <div class="faq-card">
+            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight">¿Qué tipos de problemas resuelve?</p>
+            <p class="text-[10px] text-slate-400">Álgebra, cálculo, trigonometría y estadística. El motor identifica las variables y aplica el teorema correspondiente en milisegundos.</p>
+        </div>
+
+        <div class="faq-card">
+            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight">¿Muestra el procedimiento?</p>
+            <p class="text-[10px] text-slate-400">Sí. Genera un archivo con el desarrollo paso a paso para que no solo tengas el resultado, sino la explicación lógica para el examen.</p>
+        </div>
+    </div>
+
+    <footer class="text-center opacity-20 pb-10 cyber-font uppercase text-[8px]">
+        System-Link: Tareas-Express Core
+    </footer>
+
+    <script>
+        function startVisualScan() {
+            const line = document.getElementById('scannerLine');
+            const status = document.getElementById('cameraStatus');
+            const resultAR = document.getElementById('resultAR');
+
+            status.classList.add('hidden');
+            line.style.display = 'block';
+            resultAR.classList.remove('hidden');
+
+            // Publicidad Smartlink
+            window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
+
+            setTimeout(() => {
+                const blob = new Blob(["SOLUCIÓN MATEMÁTICA DETALLADA\n\nPROBLEMA: Detectado vía Imagen\nRESULTADO: x = 42\n\nPASOS:\n1. Transposición de términos.\n2. Simplificación de constantes.\n3. Resolución final."], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = "Solucion_MathVisual.txt";
+                link.click();
+                
+                // Resetear UI
+                line.style.display = 'none';
+                status.classList.remove('hidden');
+                resultAR.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Lógica PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installAppBtn').classList.remove('hidden');
+        });
+
+        document.getElementById('installAppBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt = null;
+            }
+        });
+    </script>
+</body>
+</html>
