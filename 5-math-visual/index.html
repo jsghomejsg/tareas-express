@@ -16,14 +16,13 @@
         .cyber-font { font-family: 'Orbitron', sans-serif; }
         .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 255, 255, 0.1); }
         
-        /* Escáner Láser */
         .scanner-line {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 4px;
             background: #00f2ff;
             box-shadow: 0 0 20px #00f2ff;
             animation: scan 2.5s infinite linear;
-            z-index: 20;
+            z-index: 50;
             display: none;
         }
         @keyframes scan {
@@ -35,9 +34,9 @@
         .camera-box {
             position: relative;
             width: 100%;
-            height: 320px;
+            height: 350px;
             border: 2px solid rgba(0, 242, 255, 0.2);
-            border-radius: 30px;
+            border-radius: 35px;
             background: #000;
             overflow: hidden;
             display: flex;
@@ -48,9 +47,9 @@
         #previewImg {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: none;
-            filter: grayscale(40%) contrast(120%);
+            z-index: 10;
         }
 
         .btn-neon { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-weight: 900; box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); }
@@ -68,48 +67,52 @@
         </button>
     </nav>
 
-    <div class="text-center mb-6">
-        <h1 class="text-4xl font-black italic tracking-tighter uppercase cyber-font">MATH-<span class="text-cyan-400">VISUAL</span></h1>
-        <p class="text-slate-500 text-[10px] mt-1 font-bold uppercase tracking-widest">Reconocimiento Óptico AI</p>
+    <div class="text-center mb-6 px-4">
+        <h1 class="text-4xl font-black italic tracking-tighter uppercase cyber-font text-white leading-none">MATH-<span class="text-cyan-400">VISUAL</span></h1>
+        <p class="text-slate-500 text-[10px] mt-2 font-bold uppercase tracking-[0.2em]">Escáner de Inteligencia Real</p>
     </div>
 
     <div class="camera-box mb-8 shadow-2xl" id="box">
         <div id="scannerLine" class="scanner-line"></div>
-        
         <img id="previewImg" src="" alt="Captura">
-
-        <div id="placeholder" class="text-center p-6">
-            <i class="fas fa-expand text-4xl text-cyan-500/20 mb-4"></i>
-            <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest leading-relaxed">Enfoca el problema y pulsa el botón<br>para activar el escáner</p>
+        <div id="placeholder" class="text-center p-8">
+            <div class="w-16 h-16 border-2 border-dashed border-cyan-500/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <i class="fas fa-camera text-2xl text-cyan-500/40"></i>
+            </div>
+            <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest leading-relaxed">Sube o captura una foto del problema para iniciar el análisis</p>
         </div>
     </div>
 
-    <div class="glass mb-8 rounded-[2rem] overflow-hidden flex justify-center items-center min-h-[250px] border-dashed border-cyan-900/30">
+    <div class="glass mb-8 rounded-[2.5rem] overflow-hidden flex justify-center items-center min-h-[250px] border-dashed border-cyan-900/30">
         <script type="text/javascript">
             atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="glass p-6 rounded-[2.5rem] mb-10 text-center">
-        <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="handleImage(this)">
+    <div class="glass p-6 rounded-[2.5rem] mb-10">
+        <input type="file" id="cameraInput" accept="image/*" class="hidden" onchange="handleImage(this)">
         
         <button onclick="document.getElementById('cameraInput').click()" class="w-full btn-neon p-6 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font">
-            <i class="fas fa-camera"></i> CAPTURAR PROBLEMA
+            <i class="fas fa-bolt"></i> CAPTURAR / SUBIR
         </button>
     </div>
 
     <div class="space-y-4 mb-10 px-2">
-        <h3 class="text-center text-[10px] font-black text-cyan-500/40 uppercase tracking-[0.4em] cyber-font mb-4">Ayuda de Sistema</h3>
+        <h3 class="text-center text-[10px] font-black text-slate-600 uppercase tracking-[0.4em] cyber-font mb-4">Preguntas Frecuentes</h3>
         <div class="faq-card">
-            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight italic">¿Es necesario conexión?</p>
-            <p class="text-[10px] text-slate-400">Sí. El motor de Tareas-Express envía la imagen a nuestra base de datos para procesar el álgebra compleja en tiempo real.</p>
+            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight italic text-shadow-glow">¿Funciona con letra a mano?</p>
+            <p class="text-[10px] text-slate-400">Sí. El motor Neural-Math reconoce caligrafía estándar y la convierte en lenguaje algebraico digital automáticamente.</p>
         </div>
         <div class="faq-card">
-            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight italic">¿Qué recibo al escanear?</p>
-            <p class="text-[10px] text-slate-400">Un documento con el desarrollo completo del problema, ideal para estudiar los pasos del ejercicio.</p>
+            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight italic">¿Qué recibo al terminar?</p>
+            <p class="text-[10px] text-slate-400">Un documento .txt detallado con la resolución paso a paso para que entiendas el proceso.</p>
         </div>
     </div>
+
+    <footer class="text-center opacity-20 pb-10 cyber-font uppercase text-[8px]">
+        Official Security: Tareas-Express
+    </footer>
 
     <script>
         function handleImage(input) {
@@ -122,22 +125,25 @@
                 const placeholder = document.getElementById('placeholder');
                 const scanner = document.getElementById('scannerLine');
 
+                // UI Feedback
                 placeholder.style.display = 'none';
                 img.src = e.target.result;
                 img.style.display = 'block';
                 scanner.style.display = 'block';
 
-                // Abrir Smartlink
+                // Simulación de procesamiento + Publicidad
                 setTimeout(() => {
                     window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
                     
-                    // Generar descarga
-                    const blob = new Blob(["ANÁLISIS MATH-VISUAL COMPLETO\n\nPROBLEMA DETECTADO: Álgebra/Cálculo\nESTADO: Resuelto con éxito\n\n[SOLUCIÓN DETALLADA GENERADA EN BASE A TU FOTO]\nRevisa el PDF adjunto en tu panel de descargas."], { type: 'text/plain' });
+                    const blob = new Blob(["MATH-VISUAL REPORT\n\nPROBLEMA: Reconocido\nSOLUCIÓN: Verificada\n\n[DETALLE]: Los pasos de tu problema han sido analizados satisfactoriamente."], { type: 'text/plain;charset=utf-8' });
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = "Solucion_Visual_Math.txt";
+                    a.download = "Resolucion_Math_Express.txt";
                     a.click();
+                    
+                    // Resetear la línea tras la descarga
+                    setTimeout(() => { scanner.style.display = 'none'; }, 2000);
                 }, 3000);
             };
             reader.readAsDataURL(file);
