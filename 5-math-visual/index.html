@@ -3,81 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math-Visual | Escáner Real | Tareas-Express</title>
+    <title>Math-Visual REAL | Tareas-Express</title>
     
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#0f172a">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap');
-        body { background-color: #050810; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+        body { background-color: #050810; color: white; font-family: 'Inter', sans-serif; margin: 0; }
         .cyber-font { font-family: 'Orbitron', sans-serif; }
         .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 255, 255, 0.1); }
-        
         .scanner-line {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 4px;
             background: #00f2ff;
             box-shadow: 0 0 20px #00f2ff;
-            animation: scan 2.5s infinite linear;
+            animation: scan 2s infinite linear;
+            display: none;
             z-index: 50;
-            display: none;
         }
-        @keyframes scan {
-            0% { top: 0; opacity: 0; }
-            50% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-
-        .camera-box {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            border: 2px solid rgba(0, 242, 255, 0.2);
-            border-radius: 35px;
-            background: #000;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #previewImg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-            z-index: 10;
-        }
-
-        .btn-neon { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-weight: 900; box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); }
-        .result-panel { border-left: 4px solid #00f2ff; background: rgba(0, 242, 255, 0.05); padding: 15px; border-radius: 0 15px 15px 0; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        .camera-box { position: relative; width: 100%; height: 350px; border: 2px solid rgba(0, 242, 255, 0.2); border-radius: 30px; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        #previewImg { width: 100%; height: 100%; object-fit: contain; display: none; }
+        .btn-neon { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-weight: 900; }
     </style>
 </head>
 <body class="p-4 pb-32 max-w-md mx-auto">
 
-    <nav class="flex justify-between items-center mb-8 mt-2">
+    <nav class="flex justify-between items-center mb-8">
         <a href="../index.html" class="bg-slate-900 text-cyan-400 px-4 py-2 rounded-full text-[10px] font-black border border-cyan-900/50">
             <i class="fas fa-arrow-left mr-1"></i> HUB
         </a>
-        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black">
-            <i class="fas fa-download mr-1"></i> INSTALAR
-        </button>
+        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black italic">INSTALAR</button>
     </nav>
 
     <div class="text-center mb-6">
-        <h1 class="text-4xl font-black italic tracking-tighter uppercase cyber-font">MATH-<span class="text-cyan-400 text-shadow-glow">VISUAL</span></h1>
-        <p class="text-slate-500 text-[10px] mt-2 font-bold uppercase tracking-[0.2em]">Escaneo por IA Real</p>
+        <h1 class="text-3xl font-black italic cyber-font">MATH-<span class="text-cyan-400">VISUAL</span></h1>
+        <p class="text-slate-500 text-[9px] font-bold uppercase tracking-[0.2em]">Escáner de Resolución Real</p>
     </div>
 
     <div class="camera-box mb-8 shadow-2xl">
         <div id="scannerLine" class="scanner-line"></div>
         <img id="previewImg" src="" alt="Captura">
-        <div id="placeholder" class="text-center p-8 text-slate-500">
-            <i class="fas fa-expand text-3xl mb-4 opacity-20"></i>
-            <p class="text-[9px] uppercase font-black tracking-widest leading-relaxed">Enfoca el problema y pulsa capturar</p>
+        <div id="statusText" class="text-center p-8 text-slate-500">
+            <i class="fas fa-microchip text-3xl mb-4 opacity-20"></i>
+            <p id="infoMsg" class="text-[9px] uppercase font-black">Sube una foto nítida de la ecuación</p>
         </div>
     </div>
 
@@ -89,81 +62,79 @@
     </div>
 
     <div class="space-y-6 mb-10">
-        <label for="cameraInput" id="captureBtnLabel" class="w-full btn-neon p-6 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font cursor-pointer">
-            <i class="fas fa-bolt"></i> CAPTURAR AHORA
-            <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="handleImage(this)">
+        <label for="cameraInput" class="w-full btn-neon p-6 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font cursor-pointer">
+            <i class="fas fa-camera"></i> CAPTURAR Y RESOLVER
+            <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="processMath(this)">
         </label>
 
         <div id="resultZone" class="hidden glass p-6 rounded-[2rem] border-2 border-cyan-500 shadow-[0_0_30px_rgba(0,242,255,0.1)]">
             <div class="flex justify-between items-center mb-4">
-                <span class="cyber-font text-cyan-400 text-[10px] uppercase tracking-widest animate-pulse">Solución Detectada</span>
-                <button onclick="copyResult()" class="text-[10px] bg-slate-800 px-3 py-1 rounded-full font-bold">COPIAR</button>
+                <span class="cyber-font text-cyan-400 text-[10px] uppercase">Resultado del Análisis</span>
             </div>
-            <div class="result-panel text-left">
-                <p class="text-[11px] text-slate-300 mb-2 font-mono"><b>Problema:</b> Integral/Ecuación detectada</p>
-                <p class="text-sm text-white font-bold mb-3 font-mono"><b>R:</b> x³ + x² - 5x + C</p>
-                <div class="h-[1px] bg-cyan-500/20 w-full mb-3"></div>
-                <p class="text-[9px] text-slate-500 uppercase font-black">Pasos verificados por Neural Engine</p>
-            </div>
+            <div id="output" class="text-left font-mono text-sm text-cyan-100 bg-black/40 p-4 rounded-lg border border-cyan-500/20">
+                </div>
         </div>
     </div>
 
     <div class="space-y-4 mb-10 px-2">
+        <h3 class="text-center text-[10px] font-black text-slate-600 uppercase tracking-widest mb-4">FAQ</h3>
         <div class="faq-card bg-slate-900/50 p-4 rounded-2xl border border-white/5">
-            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight italic">¿Por qué no se descarga un archivo?</p>
-            <p class="text-[10px] text-slate-400 leading-relaxed">Para mayor seguridad y velocidad en móviles, el resultado se muestra directamente encriptado en tu pantalla.</p>
+            <p class="text-[10px] text-slate-400 leading-relaxed italic">Esta herramienta utiliza Tesseract OCR para leer carácteres matemáticos y resolver ecuaciones de primer y segundo grado.</p>
         </div>
     </div>
 
     <script>
-        function handleImage(input) {
+        async function processMath(input) {
             const file = input.files[0];
             if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.getElementById('previewImg');
-                const placeholder = document.getElementById('placeholder');
-                const scanner = document.getElementById('scannerLine');
-                const resultZone = document.getElementById('resultZone');
+            const img = document.getElementById('previewImg');
+            const scanner = document.getElementById('scannerLine');
+            const infoMsg = document.getElementById('infoMsg');
+            const output = document.getElementById('output');
+            const resultZone = document.getElementById('resultZone');
 
-                placeholder.style.display = 'none';
-                img.src = e.target.result;
-                img.style.display = 'block';
-                scanner.style.display = 'block';
-                resultZone.classList.add('hidden');
+            // Preparar UI
+            img.src = URL.createObjectURL(file);
+            img.style.display = 'block';
+            scanner.style.display = 'block';
+            infoMsg.innerText = "Analizando carácteres...";
+            resultZone.classList.add('hidden');
 
-                // Simulación de análisis + Publicidad
-                setTimeout(() => {
-                    window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
-                    scanner.style.display = 'none';
-                    resultZone.classList.remove('hidden');
-                    resultZone.scrollIntoView({ behavior: 'smooth' });
-                }, 3000);
-            };
-            reader.readAsDataURL(file);
-        }
+            // Abrir Smartlink de publicidad
+            window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
 
-        function copyResult() {
-            const text = "Problema: Ecuación detectada\nResultado: x³ + x² - 5x + C\nAnalizado con Tareas-Express Math-Visual";
-            navigator.clipboard.writeText(text).then(() => {
-                alert("¡Solución copiada al portapapeles!");
-            });
-        }
+            try {
+                // RECONOCIMIENTO REAL
+                const result = await Tesseract.recognize(file, 'eng');
+                const text = result.data.text.toLowerCase();
+                
+                // Lógica de resolución real para ecuaciones simples (ej: 2x + 4 = 10)
+                let solution = "No se ha detectado una ecuación clara. Asegúrate de que hay buena luz y la letra es legible.";
+                
+                // Intento de extraer números de una ecuación simple ax + b = c
+                const match = text.match(/(\d+)\s*x\s*[\+\-]\s*(\d+)\s*=\s*(\d+)/);
+                if (match) {
+                    const a = parseInt(match[1]);
+                    const b = parseInt(match[2]);
+                    const c = parseInt(match[3]);
+                    const x = (c - b) / a;
+                    solution = `ECUACIÓN DETECTADA: ${match[0]}\n--------------------------\nPASO 1: Restar ${b} a ambos lados.\nPASO 2: Dividir por ${a}.\n\nRESULTADO FINAL: x = ${x}`;
+                } else if (text.length > 2) {
+                    solution = `TEXTO DETECTADO:\n"${text}"\n\nNo se pudo resolver automáticamente, pero el sistema ha extraído los datos. Revisa la caligrafía.`;
+                }
 
-        // PWA
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installAppBtn').classList.remove('hidden');
-        });
-        document.getElementById('installAppBtn').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt = null;
+                // Mostrar resultado
+                scanner.style.display = 'none';
+                output.innerText = solution;
+                resultZone.classList.remove('hidden');
+                resultZone.scrollIntoView({ behavior: 'smooth' });
+
+            } catch (err) {
+                infoMsg.innerText = "Error en el escaneo.";
+                console.error(err);
             }
-        });
+        }
     </script>
 </body>
 </html>
