@@ -5,24 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apuntes a Mano - Tareas-Express</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Importamos varios estilos de letra a mano */
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Gloria+Hallelujah&family=Indie+Flower&family=Shadows+Into+Light&display=swap');
-        
         body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; }
-        
         .paper { 
             background-color: #fff; 
-            color: #1a365d; /* Color tinta azul oscuro */
+            color: #1a365d; 
             line-height: 1.6;
             background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
             background-size: 100% 1.6rem;
-            transition: font-family 0.3s ease;
         }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        
-        /* Clases para cambiar la fuente dinámicamente */
         .font-style-1 { font-family: 'Caveat', cursive; }
         .font-style-2 { font-family: 'Shadows Into Light', cursive; }
         .font-style-3 { font-family: 'Indie Flower', cursive; }
@@ -32,80 +27,68 @@
 <body class="p-4 pb-24">
 
     <nav class="flex justify-between items-center mb-6">
-        <a href="../index.html" class="text-purple-400 font-bold flex items-center gap-2">
-            <i class="fas fa-arrow-left"></i> Inicio
-        </a>
-        <span class="text-xs bg-purple-900/50 px-3 py-1 rounded-full border border-purple-500/30 font-mono">App #1</span>
+        <a href="../index.html" class="text-purple-400 font-bold flex items-center gap-2"><i class="fas fa-arrow-left"></i> Inicio</a>
+        <span class="text-xs bg-purple-900/50 px-3 py-1 rounded-full border border-purple-500/30">App #1</span>
     </nav>
-
-    <h2 class="text-2xl font-bold mb-2 text-center">Apuntes a Mano 📝</h2>
-    <p class="text-slate-400 text-sm text-center mb-6 italic">Personaliza tu caligrafía real.</p>
 
     <div class="flex justify-center mb-6 min-h-[250px]">
         <script type="text/javascript">
-            atOptions = {
-                'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
+            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="glass p-4 rounded-2xl mb-4 border border-purple-500/20">
-        <label class="block text-[10px] font-bold text-purple-400 mb-3 uppercase tracking-tighter text-center">Selecciona tu tipo de letra:</label>
+    <div class="glass p-4 rounded-2xl mb-4">
+        <label class="block text-[10px] font-bold text-purple-400 mb-3 uppercase text-center font-mono">Tipo de letra:</label>
         <div class="grid grid-cols-4 gap-2">
-            <button onclick="changeFont('font-style-1')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-1 hover:bg-purple-600 transition-colors">Abc</button>
-            <button onclick="changeFont('font-style-2')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-2 hover:bg-purple-600 transition-colors">Abc</button>
-            <button onclick="changeFont('font-style-3')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-3 hover:bg-purple-600 transition-colors">Abc</button>
-            <button onclick="changeFont('font-style-4')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-4 hover:bg-purple-600 transition-colors">Abc</button>
+            <button onclick="changeFont('font-style-1')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-1">Abc</button>
+            <button onclick="changeFont('font-style-2')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-2">Abc</button>
+            <button onclick="changeFont('font-style-3')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-3">Abc</button>
+            <button onclick="changeFont('font-style-4')" class="bg-slate-800 p-2 rounded-lg text-sm font-style-4">Abc</button>
         </div>
     </div>
 
     <div class="glass p-4 rounded-2xl mb-6">
-        <textarea id="inputText" class="w-full h-32 bg-slate-800 border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-purple-500 outline-none" placeholder="Pega aquí el texto de la IA..."></textarea>
+        <textarea id="inputText" class="w-full h-32 bg-slate-800 border-none rounded-xl p-3 text-sm outline-none" placeholder="Pega aquí el texto..."></textarea>
     </div>
 
-    <div id="paperPreview" class="paper p-8 rounded-sm shadow-2xl min-h-[300px] text-xl overflow-hidden mb-6 font-style-1">
-        Escribe arriba para ver tu letra...
+    <div id="captureArea" class="mb-6">
+        <div id="paperPreview" class="paper p-8 rounded-sm shadow-2xl min-h-[400px] text-2xl overflow-hidden font-style-1">
+            Escribe algo...
+        </div>
     </div>
 
-    <button onclick="downloadAction()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-2xl font-bold text-lg shadow-lg flex items-center justify-center gap-3 active:scale-95 transition-transform">
-        <i class="fas fa-file-download"></i> Descargar Folio (JPG)
+    <button onclick="processDownload()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-2xl font-bold text-lg shadow-lg flex items-center justify-center gap-3 active:scale-95 transition-transform">
+        <i class="fas fa-file-download"></i> DESCARGAR MI FOLIO
     </button>
-
-    <button onclick="shareWS()" class="w-full mt-4 bg-green-600/20 text-green-400 border border-green-600/30 p-3 rounded-2xl font-bold flex items-center justify-center gap-2">
-        <i class="fab fa-whatsapp"></i> Compartir con la clase
-    </button>
-
-    <footer class="mt-12 text-[10px] text-slate-500 text-center px-4">
-        <p>Aviso: Herramienta de diseño para apoyo al estudio.</p>
-        <p class="mt-2 font-bold">© 2026 Tareas-Express</p>
-    </footer>
 
     <script>
         const input = document.getElementById('inputText');
         const preview = document.getElementById('paperPreview');
 
         input.addEventListener('input', (e) => {
-            preview.innerText = e.target.value || "Escribe arriba para ver tu letra...";
+            preview.innerText = e.target.value || "Escribe algo...";
         });
 
-        // Función para cambiar fuente
         function changeFont(fontClass) {
-            preview.className = 'paper p-8 rounded-sm shadow-2xl min-h-[300px] text-xl overflow-hidden mb-6 ' + fontClass;
+            preview.className = 'paper p-8 rounded-sm shadow-2xl min-h-[400px] text-2xl overflow-hidden ' + fontClass;
         }
 
-        function downloadAction() {
+        async function processDownload() {
+            if(!input.value) return alert("Escribe algo primero");
+            
+            // 1. Abrimos el Smartlink (Publicidad)
             window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
-            alert("Generando imagen de alta resolución con tu caligrafía...");
-        }
-
-        function shareWS() {
-            const text = "He encontrado esta web para pasar los apuntes a mano con mi letra real. ¡Mira! " + window.location.href;
-            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text));
+            
+            // 2. Convertimos el div del papel en una imagen JPG
+            const canvas = await html2canvas(document.getElementById('captureArea'));
+            const image = canvas.toDataURL("image/jpeg", 0.9);
+            
+            // 3. Descargamos la imagen automáticamente
+            const link = document.createElement('a');
+            link.download = 'mi-tarea-a-mano.jpg';
+            link.href = image;
+            link.click();
         }
     </script>
 </body>
