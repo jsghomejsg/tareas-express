@@ -3,32 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math-Visual REAL | Tareas-Express</title>
+    <title>Math-Solver Pro | Tareas-Express</title>
     
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#0f172a">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap');
         body { background-color: #050810; color: white; font-family: 'Inter', sans-serif; margin: 0; }
         .cyber-font { font-family: 'Orbitron', sans-serif; }
         .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 255, 255, 0.1); }
-        .scanner-line {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: #00f2ff;
-            box-shadow: 0 0 20px #00f2ff;
-            animation: scan 2s infinite linear;
-            display: none;
-            z-index: 50;
-        }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-        .camera-box { position: relative; width: 100%; height: 350px; border: 2px solid rgba(0, 242, 255, 0.2); border-radius: 30px; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        #previewImg { width: 100%; height: 100%; object-fit: contain; display: none; }
-        .btn-neon { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-weight: 900; }
+        .input-math { background: #1e293b; border: 2px solid #334155; padding: 18px; border-radius: 20px; width: 100%; outline: none; font-size: 1.2rem; color: #00f2ff; text-align: center; font-family: 'Orbitron', sans-serif; transition: all 0.3s; }
+        .input-math:focus { border-color: #00f2ff; box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+        .btn-solve { background: linear-gradient(45deg, #00f2ff, #0066ff); color: #000; font-weight: 900; }
     </style>
 </head>
 <body class="p-4 pb-32 max-w-md mx-auto">
@@ -37,102 +26,69 @@
         <a href="../index.html" class="bg-slate-900 text-cyan-400 px-4 py-2 rounded-full text-[10px] font-black border border-cyan-900/50">
             <i class="fas fa-arrow-left mr-1"></i> HUB
         </a>
-        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black italic">INSTALAR</button>
+        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black">INSTALAR</button>
     </nav>
 
-    <div class="text-center mb-6">
-        <h1 class="text-3xl font-black italic cyber-font">MATH-<span class="text-cyan-400">VISUAL</span></h1>
-        <p class="text-slate-500 text-[9px] font-bold uppercase tracking-[0.2em]">Escáner de Resolución Real</p>
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-black italic cyber-font">MATH-<span class="text-cyan-400">SOLVER</span></h1>
+        <p class="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em]">Resolución de Álgebra Real</p>
     </div>
 
-    <div class="camera-box mb-8 shadow-2xl">
-        <div id="scannerLine" class="scanner-line"></div>
-        <img id="previewImg" src="" alt="Captura">
-        <div id="statusText" class="text-center p-8 text-slate-500">
-            <i class="fas fa-microchip text-3xl mb-4 opacity-20"></i>
-            <p id="infoMsg" class="text-[9px] uppercase font-black">Sube una foto nítida de la ecuación</p>
+    <div class="glass p-6 rounded-[2.5rem] space-y-6 mb-8 border border-cyan-500/20">
+        <div>
+            <label class="block text-[10px] font-black text-slate-500 uppercase mb-3 ml-1 tracking-widest text-center">Introduce la Ecuación:</label>
+            <input type="text" id="mathInput" class="input-math" placeholder="Ej: 2x + 4 = 10">
         </div>
+
+        <button onclick="solveRealMath()" class="w-full btn-solve p-5 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3">
+            <i class="fas fa-bolt"></i> Obtener Pasos y Resultado
+        </button>
     </div>
 
-    <div class="glass mb-8 rounded-[2rem] overflow-hidden flex justify-center items-center min-h-[250px] border-dashed border-cyan-900/30">
+    <div class="glass mb-8 rounded-[2rem] overflow-hidden flex justify-center items-center min-h-[250px] border-dashed border-slate-700">
         <script type="text/javascript">
             atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="space-y-6 mb-10">
-        <label for="cameraInput" class="w-full btn-neon p-6 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font cursor-pointer">
-            <i class="fas fa-camera"></i> CAPTURAR Y RESOLVER
-            <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="processMath(this)">
-        </label>
-
-        <div id="resultZone" class="hidden glass p-6 rounded-[2rem] border-2 border-cyan-500 shadow-[0_0_30px_rgba(0,242,255,0.1)]">
-            <div class="flex justify-between items-center mb-4">
-                <span class="cyber-font text-cyan-400 text-[10px] uppercase">Resultado del Análisis</span>
+    <div id="resultZone" class="hidden glass p-6 rounded-[2rem] border-2 border-cyan-500 shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+        <h4 class="cyber-font text-cyan-400 text-xs mb-4 uppercase">Desarrollo Paso a Paso:</h4>
+        <div id="stepsOutput" class="text-left font-mono text-xs text-slate-300 space-y-3 leading-relaxed">
             </div>
-            <div id="output" class="text-left font-mono text-sm text-cyan-100 bg-black/40 p-4 rounded-lg border border-cyan-500/20">
-                </div>
-        </div>
-    </div>
-
-    <div class="space-y-4 mb-10 px-2">
-        <h3 class="text-center text-[10px] font-black text-slate-600 uppercase tracking-widest mb-4">FAQ</h3>
-        <div class="faq-card bg-slate-900/50 p-4 rounded-2xl border border-white/5">
-            <p class="text-[10px] text-slate-400 leading-relaxed italic">Esta herramienta utiliza Tesseract OCR para leer carácteres matemáticos y resolver ecuaciones de primer y segundo grado.</p>
-        </div>
     </div>
 
     <script>
-        async function processMath(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            const img = document.getElementById('previewImg');
-            const scanner = document.getElementById('scannerLine');
-            const infoMsg = document.getElementById('infoMsg');
-            const output = document.getElementById('output');
+        function solveRealMath() {
+            const input = document.getElementById('mathInput').value.replace(/\s+/g, '');
+            const stepsZone = document.getElementById('stepsOutput');
             const resultZone = document.getElementById('resultZone');
 
-            // Preparar UI
-            img.src = URL.createObjectURL(file);
-            img.style.display = 'block';
-            scanner.style.display = 'block';
-            infoMsg.innerText = "Analizando carácteres...";
-            resultZone.classList.add('hidden');
-
-            // Abrir Smartlink de publicidad
+            // Abrir Smartlink
             window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
 
-            try {
-                // RECONOCIMIENTO REAL
-                const result = await Tesseract.recognize(file, 'eng');
-                const text = result.data.text.toLowerCase();
-                
-                // Lógica de resolución real para ecuaciones simples (ej: 2x + 4 = 10)
-                let solution = "No se ha detectado una ecuación clara. Asegúrate de que hay buena luz y la letra es legible.";
-                
-                // Intento de extraer números de una ecuación simple ax + b = c
-                const match = text.match(/(\d+)\s*x\s*[\+\-]\s*(\d+)\s*=\s*(\d+)/);
-                if (match) {
-                    const a = parseInt(match[1]);
-                    const b = parseInt(match[2]);
-                    const c = parseInt(match[3]);
-                    const x = (c - b) / a;
-                    solution = `ECUACIÓN DETECTADA: ${match[0]}\n--------------------------\nPASO 1: Restar ${b} a ambos lados.\nPASO 2: Dividir por ${a}.\n\nRESULTADO FINAL: x = ${x}`;
-                } else if (text.length > 2) {
-                    solution = `TEXTO DETECTADO:\n"${text}"\n\nNo se pudo resolver automáticamente, pero el sistema ha extraído los datos. Revisa la caligrafía.`;
-                }
+            // Lógica Real para ax + b = c
+            const regex = /^([+-]?\d*)x([+-]\d+)=([+-]?\d+)$/;
+            const match = input.match(regex);
 
-                // Mostrar resultado
-                scanner.style.display = 'none';
-                output.innerText = solution;
+            if (match) {
+                let a = match[1] === "" || match[1] === "+" ? 1 : (match[1] === "-" ? -1 : parseInt(match[1]));
+                let b = parseInt(match[2]);
+                let c = parseInt(match[3]);
+                
+                let step1 = c - b;
+                let x = step1 / a;
+
+                stepsZone.innerHTML = `
+                    <p class="text-white font-bold underline">Ecuación: ${a}x + (${b}) = ${c}</p>
+                    <p>1. Transponemos términos: <br> ${a}x = ${c} - (${b})</p>
+                    <p>2. Simplificamos: <br> ${a}x = ${step1}</p>
+                    <p>3. Despejamos X: <br> x = ${step1} / ${a}</p>
+                    <p class="text-cyan-400 font-bold text-sm mt-4">RESULTADO: x = ${x}</p>
+                `;
                 resultZone.classList.remove('hidden');
-                resultZone.scrollIntoView({ behavior: 'smooth' });
-
-            } catch (err) {
-                infoMsg.innerText = "Error en el escaneo.";
-                console.error(err);
+            } else {
+                alert("Por favor, introduce una ecuación válida como '2x+4=10'");
             }
         }
     </script>
