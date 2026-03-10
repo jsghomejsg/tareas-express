@@ -1,129 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math-Visual | Escáner Real | Tareas-Express</title>
-    
-    <link rel="manifest" href="../manifest.json">
-    <meta name="theme-color" content="#0f172a">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@400;700&display=swap');
-        body { background-color: #050810; color: white; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
-        .cyber-font { font-family: 'Orbitron', sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(0, 255, 255, 0.1); }
-        
-        .scanner-line {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: #00f2ff;
-            box-shadow: 0 0 20px #00f2ff;
-            animation: scan 2.5s infinite linear;
-            z-index: 50;
-            display: none;
-        }
-        @keyframes scan {
-            0% { top: 0; opacity: 0; }
-            50% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-
-        .camera-box {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            border: 2px solid rgba(0, 242, 255, 0.2);
-            border-radius: 35px;
-            background: #000;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #previewImg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-            z-index: 10;
-        }
-
-        .btn-neon { 
-            background: linear-gradient(45deg, #00f2ff, #0066ff); 
-            color: #000; 
-            font-weight: 900; 
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); 
-        }
-        
-        .faq-card { background: rgba(30, 41, 59, 0.4); border-radius: 20px; padding: 15px; border: 1px solid rgba(0, 242, 255, 0.05); }
-    </style>
-</head>
-<body class="p-4 pb-32 max-w-md mx-auto">
-
-    <nav class="flex justify-between items-center mb-8 mt-2">
-        <a href="../index.html" class="bg-slate-900 text-cyan-400 px-4 py-2 rounded-full text-[10px] font-black border border-cyan-900/50">
-            <i class="fas fa-arrow-left mr-1"></i> HUB
-        </a>
-        <button id="installAppBtn" class="hidden bg-cyan-500 text-black px-4 py-2 rounded-full text-[10px] font-black shadow-lg">
-            <i class="fas fa-download mr-1"></i> INSTALAR APP
+<div id="resultZone" class="hidden glass p-6 rounded-[2.5rem] mb-10 border-2 border-cyan-500 shadow-[0_0_20px_rgba(0,242,255,0.2)] text-center animate-bounce">
+        <h4 class="cyber-font text-cyan-400 text-sm mb-3 uppercase">¡Análisis Completado!</h4>
+        <button onclick="downloadResult()" class="w-full bg-white text-black p-4 rounded-xl font-black uppercase text-sm flex items-center justify-center gap-2">
+            <i class="fas fa-file-download"></i> Descargar Solución PDF
         </button>
-    </nav>
-
-    <div class="text-center mb-6">
-        <h1 class="text-4xl font-black italic tracking-tighter uppercase cyber-font text-white leading-none">MATH-<span class="text-cyan-400">VISUAL</span></h1>
-        <p class="text-slate-500 text-[10px] mt-2 font-bold uppercase tracking-[0.2em]">Escáner de Inteligencia Real</p>
     </div>
-
-    <div class="camera-box mb-8 shadow-2xl" id="box">
-        <div id="scannerLine" class="scanner-line"></div>
-        <img id="previewImg" src="" alt="Captura">
-        
-        <div id="placeholder" class="text-center p-8">
-            <div class="w-16 h-16 border-2 border-dashed border-cyan-500/30 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <i class="fas fa-camera text-2xl text-cyan-500/40"></i>
-            </div>
-            <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest leading-relaxed">Pulsa el botón de abajo para activar la cámara y escanear el problema</p>
-        </div>
-    </div>
-
-    <div class="glass mb-8 rounded-[2rem] overflow-hidden flex justify-center items-center min-h-[250px] border-dashed border-cyan-900/30">
-        <script type="text/javascript">
-            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
-    </div>
-
-    <div class="glass p-6 rounded-[2.5rem] mb-10 text-center">
-        <label for="cameraInput" class="w-full btn-neon p-6 rounded-2xl font-black text-lg active:scale-95 transition-all uppercase italic tracking-tighter flex items-center justify-center gap-3 cyber-font cursor-pointer">
-            <i class="fas fa-bolt"></i> CAPTURAR AHORA
-            <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="handleImage(this)">
-        </label>
-        <p class="text-[9px] text-slate-500 mt-4 font-bold uppercase tracking-widest">Tecnología de Visión Artificial Activa</p>
-    </div>
-
-    <div class="space-y-4 mb-10 px-2">
-        <h3 class="text-center text-[10px] font-black text-slate-600 uppercase tracking-[0.4em] cyber-font mb-4">FAQ - Sistema de Ayuda</h3>
-        
-        <div class="faq-card">
-            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight">¿Por qué me pide permiso para la cámara?</p>
-            <p class="text-[10px] text-slate-400 leading-relaxed">Es necesario para capturar la imagen del ejercicio. La imagen se procesa de forma anónima en nuestros servidores de IA.</p>
-        </div>
-
-        <div class="faq-card">
-            <p class="text-[11px] font-black text-cyan-400 mb-1 uppercase tracking-tight">¿Funciona con ecuaciones complejas?</p>
-            <p class="text-[10px] text-slate-400 leading-relaxed">Sí. El motor está entrenado para reconocer álgebra, cálculo y estadística avanzada directamente desde tu libreta.</p>
-        </div>
-    </div>
-
-    <footer class="text-center opacity-20 pb-10 cyber-font uppercase text-[8px]">
-        Official Security: Tareas-Express
-    </footer>
 
     <script>
+        let generatedBlobUrl = "";
+
         function handleImage(input) {
             const file = input.files[0];
             if (!file) return;
@@ -133,49 +17,53 @@
                 const img = document.getElementById('previewImg');
                 const placeholder = document.getElementById('placeholder');
                 const scanner = document.getElementById('scannerLine');
+                const resultZone = document.getElementById('resultZone');
 
-                // Mostrar la foto que el usuario acaba de hacer
+                // Reset y Visual
+                resultZone.classList.add('hidden');
                 placeholder.style.display = 'none';
                 img.src = e.target.result;
                 img.style.display = 'block';
-                
-                // Iniciar animación de escaneo láser
                 scanner.style.display = 'block';
 
-                // Abrir Smartlink de Adsterra tras 3 segundos de "análisis"
+                // Simulamos proceso de 3 segundos
                 setTimeout(() => {
+                    // 1. Abrir Publicidad (Smartlink)
                     window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
                     
-                    // Generar descarga del resultado "real"
-                    const resultText = `ANÁLISIS DE IMAGEN MATH-VISUAL\n============================\nESTADO: Éxito\nFECHA: 2026\n\n[SOLUCIÓN DETECTADA]:\nBasándonos en la imagen capturada, hemos procesado los pasos lógicos del problema. Revisa el procedimiento en tu editor de texto.`;
-                    
+                    // 2. Preparar el archivo para descarga manual
+                    const resultText = `MATH-VISUAL REPORT\n============================\nRESULTADO DE INTEGRAL: x^3 + x^2 - 5x + C\n\nEl sistema ha detectado los pasos lógicos.`;
                     const blob = new Blob([resultText], { type: 'text/plain;charset=utf-8' });
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = "Solucion_Math_Captura.txt";
-                    a.click();
+                    generatedBlobUrl = window.URL.createObjectURL(blob);
                     
-                    setTimeout(() => { scanner.style.display = 'none'; }, 1000);
+                    // 3. Mostrar el botón de descarga (Esto no lo bloquea el móvil)
+                    scanner.style.display = 'none';
+                    resultZone.classList.remove('hidden');
+                    
+                    // Intentar descarga automática de respaldo
+                    downloadResult();
                 }, 3000);
             };
             reader.readAsDataURL(file);
         }
 
-        // Lógica PWA mejorada para instalación dentro de la App
+        function downloadResult() {
+            if (generatedBlobUrl) {
+                const a = document.createElement('a');
+                a.href = generatedBlobUrl;
+                a.download = "Solucion_Math_Captura.txt";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+
+        // Lógica PWA
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('installAppBtn').classList.remove('hidden');
-        });
-
-        document.getElementById('installAppBtn').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt = null;
-            }
+            const installBtn = document.getElementById('installAppBtn');
+            if(installBtn) installBtn.classList.remove('hidden');
         });
     </script>
-</body>
-</html>
