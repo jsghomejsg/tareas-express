@@ -3,116 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpiador de Huellas | Tareas-Express</title>
     
-    <title>Tareas-Express | Kit de Supervivencia Estudiantil</title>
-    <meta name="description" content="Pasa apuntes a mano, humaniza textos de IA y limpia metadatos. La herramienta definitiva para estudiantes.">
-    <meta name="google-site-verification" content="FhFwyv62eHynne7MhU-UK2Uqy9o94JAWaU6_cfD-5YI" />
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f172a">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        .card-anim { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .card-anim:active { transform: scale(0.96); }
-        .gradient-text { background: linear-gradient(90deg, #a78bfa, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; margin: 0; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .input-style { background: #1e293b; border: 1px solid #334155; padding: 12px; border-radius: 12px; width: 100%; outline: none; font-size: 0.875rem; color: white; }
+        .input-style:focus { border-color: #ef4444; }
     </style>
 </head>
-<body class="p-5 max-w-md mx-auto pb-20">
+<body class="p-4 pb-32">
 
-    <header class="flex justify-between items-center mt-4 mb-10">
-        <div>
-            <h1 class="text-3xl font-black italic tracking-tighter gradient-text">TAREAS-EXPRESS</h1>
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">The Student Hub 2026</p>
+    <nav class="flex justify-between items-center mb-6">
+        <a href="../index.html" class="bg-slate-800 text-red-400 px-4 py-2 rounded-full text-[11px] font-bold border border-slate-700 transition-all active:scale-90">
+            <i class="fas fa-arrow-left mr-2"></i>Inicio
+        </a>
+        <div class="text-right">
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Seguridad Nivel Pro</p>
+            <p class="text-xs font-black text-red-500 uppercase italic">Modo Invisible</p>
         </div>
-        <button id="installBtn" class="hidden bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-full text-[11px] font-black shadow-lg shadow-blue-900/40 animate-pulse border border-blue-400/30">
-            <i class="fas fa-download mr-1"></i> INSTALAR
-        </button>
-    </header>
+    </nav>
 
-    <div class="flex justify-center mb-10 min-h-[250px] bg-slate-900/40 rounded-[2rem] items-center border border-dashed border-slate-700/50">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-black italic tracking-tighter text-white">LIMPIADOR DE HUELLAS</h1>
+        <p class="text-slate-400 text-xs">Elimina metadatos y rastros de IA de tus trabajos.</p>
+    </div>
+
+    <div class="flex justify-center mb-8 min-h-[250px] bg-slate-900/50 rounded-[2rem] items-center border border-dashed border-slate-700 overflow-hidden">
         <script type="text/javascript">
-            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
+            atOptions = {
+                'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="space-y-4">
+    <div class="glass p-6 rounded-[2rem] space-y-5 shadow-2xl">
         
-        <a href="1-apuntes-a-mano/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl">
-            <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-purple-900/40">
-                <i class="fas fa-pen-nib text-white"></i>
-            </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base">Apuntes a Mano</h3>
-                <p class="text-slate-400 text-[11px] font-medium italic">De PDF/Texto a folio real</p>
-            </div>
-            <div class="bg-slate-800/50 p-2 rounded-full border border-white/5">
-                <i class="fas fa-chevron-right text-slate-500 text-xs"></i>
-            </div>
-        </a>
+        <div>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-1 tracking-widest">Nombre del nuevo autor:</label>
+            <input type="text" id="authorName" class="input-style" placeholder="Tu nombre real...">
+        </div>
 
-        <a href="2-humanizador-texto/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl">
-            <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-blue-900/40">
-                <i class="fas fa-user-check text-white"></i>
-            </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base">Humanizador IA</h3>
-                <p class="text-slate-400 text-[11px] font-medium italic">Bypass detectores (GPTZero...)</p>
-            </div>
-            <div class="bg-slate-800/50 p-2 rounded-full border border-white/5">
-                <i class="fas fa-chevron-right text-slate-500 text-xs"></i>
-            </div>
-        </a>
+        <div>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-1 tracking-widest">Fecha de creación deseada:</label>
+            <input type="date" id="docDate" class="input-style">
+        </div>
 
-        <a href="3-limpiador-huellas/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl">
-            <div class="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-red-900/40">
-                <i class="fas fa-user-secret text-white"></i>
-            </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-base text-red-100">Limpiador de Huellas</h3>
-                <p class="text-red-400/60 text-[11px] font-medium italic">Borra el rastro de la IA</p>
-            </div>
-            <div class="bg-slate-800/50 p-2 rounded-full border border-white/5">
-                <i class="fas fa-chevron-right text-slate-500 text-xs"></i>
-            </div>
-        </a>
+        <div>
+            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-1 tracking-widest">Contenido del trabajo:</label>
+            <textarea id="workContent" class="input-style h-40 resize-none" placeholder="Pega aquí el texto final de tu trabajo..."></textarea>
+        </div>
+
+        <button onclick="processAndDownload()" class="w-full bg-gradient-to-r from-red-600 to-orange-600 p-5 rounded-2xl font-black text-lg shadow-xl shadow-red-900/20 active:scale-95 transition-all uppercase italic tracking-tighter">
+            <i class="fas fa-shield-virus mr-2"></i> Limpiar y Descargar
+        </button>
 
     </div>
 
-    <footer class="mt-12 text-center">
-        <p class="text-[10px] text-slate-600 font-bold uppercase tracking-widest">&copy; 2026 Tareas-Express Official</p>
-    </footer>
+    <div class="mt-8 px-4">
+        <div class="bg-red-900/20 border border-red-500/20 rounded-2xl p-4">
+            <p class="text-[11px] text-red-200 leading-relaxed">
+                <i class="fas fa-info-circle mr-1"></i> <b>Nota de seguridad:</b> Al descargar como archivo .txt, se eliminan automáticamente todos los metadatos ocultos (autor original, software utilizado y geolocalización) que generan las IAs y editores de texto.
+            </p>
+        </div>
+    </div>
 
     <script>
-        // Lógica PWA Mejorada
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
+        function processAndDownload() {
+            const author = document.getElementById('authorName').value;
+            const date = document.getElementById('docDate').value;
+            const content = document.getElementById('workContent').value;
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.classList.remove('hidden');
-        });
-
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBtn.classList.add('hidden');
-                }
-                deferredPrompt = null;
+            if (!author || !content) {
+                alert("Por favor, introduce tu nombre y el contenido del trabajo.");
+                return;
             }
-        });
 
-        // Registrar Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
+            // 1. Abrir Publicidad (Smartlink)
+            window.open("https://www.effectivegatecpm.com/wzxr3v2n?key=929f1c37198c48ca1ad827c5ebbc7964", '_blank');
+
+            // 2. Formatear el contenido limpio
+            const header = `TRABAJO ACADÉMICO\n------------------\nAUTOR: ${author.toUpperCase()}\nFECHA DE ENTREGA: ${date || '2026'}\n------------------\n\n`;
+            const fullText = header + content;
+
+            // 3. Crear el archivo Blob
+            const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // 4. Crear enlace de descarga
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Trabajo_${author.replace(/\s+/g, '_')}_Final.txt`;
+            
+            // 5. Ejecutar descarga
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
         }
     </script>
 </body>
