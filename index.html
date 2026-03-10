@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas-Express | Hub Estudiantes</title>
+    
+    <meta name="google-site-verification" content="FhFwyv62eHynne7MhU-UK2Uqy9o94JAWaU6_cfD-5YI" />
+
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -39,7 +42,7 @@
             </div>
             <div class="flex-1">
                 <h3 class="font-bold text-sm">Apuntes a Mano</h3>
-                <p class="text-slate-400 text-[10px] italic">De digital a papel real</p>
+                <p class="text-slate-400 text-[10px] italic font-medium">De digital a papel real</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
@@ -50,7 +53,7 @@
             </div>
             <div class="flex-1">
                 <h3 class="font-bold text-sm">Humanizador IA</h3>
-                <p class="text-slate-400 text-[10px] italic">Bypass detectores</p>
+                <p class="text-slate-400 text-[10px] italic font-medium">Bypass detectores</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
@@ -63,7 +66,6 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Si el navegador detecta que se puede instalar, mostramos el botón
             installBtn.classList.remove('hidden');
         });
 
