@@ -5,177 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Tareas-Express | Kit de Supervivencia Estudiantil</title>
-    <meta name="description" content="La herramienta definitiva para estudiantes: Pasa apuntes a mano, humaniza textos de IA y limpia metadatos para evitar que te pillen.">
+    <meta name="description" content="La herramienta definitiva para estudiantes: Apuntes a mano, Humanizador IA y Predictor de Exámenes.">
     <meta name="google-site-verification" content="FhFwyv62eHynne7MhU-UK2Uqy9o94JAWaU6_cfD-5YI" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
-
-    <meta property="og:title" content="Tareas-Express | App para Estudiantes">
-    <meta property="og:description" content="De texto digital a folio real en 1 segundo. ¡Instálala ahora!">
-    <meta property="og:type" content="website">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { 
-            background-color: #0f172a; 
-            color: white; 
-            font-family: 'Inter', sans-serif; 
-            overflow-x: hidden; 
-            -webkit-tap-highlight-color: transparent;
-        }
-        .glass { 
-            background: rgba(30, 41, 59, 0.6); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255,255,255,0.05); 
-        }
-        .card-anim { 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-        .card-anim:active { 
-            transform: scale(0.96); 
-        }
-        .gradient-text { 
-            background: linear-gradient(90deg, #a78bfa, #60a5fa); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
-        /* Ajuste para que el banner no rompa el diseño */
-        .ad-slot {
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        .glass { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .card-anim { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-anim:active { transform: scale(0.96); }
+        .gradient-text { background: linear-gradient(90deg, #a78bfa, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="p-5 max-w-md mx-auto pb-24">
 
-    <header class="flex justify-between items-start mt-4 mb-10">
+    <header class="flex justify-between items-start mt-4 mb-8">
         <div>
-            <h1 class="text-3xl font-black italic tracking-tighter gradient-text leading-none">TAREAS-EXPRESS</h1>
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-1">Herramientas Anti-Fallo</p>
+            <h1 class="text-3xl font-black italic tracking-tighter gradient-text leading-none uppercase">Tareas-Express</h1>
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-1">Student Intelligence Hub</p>
         </div>
-        <button id="installBtn" class="hidden bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-full text-[10px] font-black shadow-lg shadow-blue-900/40 border border-blue-400/30 transition-all active:scale-90">
-            <i class="fas fa-download mr-1"></i> INSTALAR APP
+        <button id="installBtn" class="hidden bg-white text-black px-4 py-2 rounded-full text-[10px] font-black shadow-xl active:scale-90 transition-all border border-white/20">
+            <i class="fas fa-download mr-1"></i> INSTALAR
         </button>
     </header>
 
-    <div class="glass mb-10 rounded-[2.5rem] overflow-hidden border-dashed border-slate-700/50 border-2">
-        <div class="ad-slot">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
-        </div>
+    <div class="glass mb-8 rounded-[2.5rem] overflow-hidden border-2 border-dashed border-slate-700/50 flex justify-center items-center min-h-[250px]">
+        <script type="text/javascript">
+            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="space-y-5">
+    <div class="space-y-4">
         
-        <a href="1-apuntes-a-mano/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block">
+        <a href="1-apuntes-a-mano/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-white/5">
             <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-purple-900/40">
                 <i class="fas fa-pen-nib text-white"></i>
             </div>
             <div class="flex-1">
                 <h3 class="font-bold text-base">Apuntes a Mano</h3>
-                <p class="text-slate-400 text-[11px] font-medium italic">Pasar texto a folio real (Rayas/Cuadros)</p>
+                <p class="text-slate-400 text-[11px] italic font-medium">Texto a folio real</p>
             </div>
-            <div class="bg-slate-800/50 p-2 rounded-full border border-white/5">
-                <i class="fas fa-chevron-right text-slate-500 text-xs"></i>
-            </div>
+            <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
 
-        <a href="2-humanizador-texto/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block">
+        <a href="2-humanizador-texto/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-white/5">
             <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-blue-900/40">
                 <i class="fas fa-user-check text-white"></i>
             </div>
             <div class="flex-1">
                 <h3 class="font-bold text-base">Humanizador IA</h3>
-                <p class="text-slate-400 text-[11px] font-medium italic">Evita detectores de IA (GPTZero...)</p>
+                <p class="text-slate-400 text-[11px] italic font-medium">Bypass Detectores</p>
             </div>
-            <div class="bg-slate-800/50 p-2 rounded-full border border-white/5">
-                <i class="fas fa-chevron-right text-slate-500 text-xs"></i>
-            </div>
+            <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
 
-        <a href="3-limpiador-huellas/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block">
+        <a href="3-limpiador-huellas/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-white/5">
             <div class="w-14 h-14 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-red-900/40">
                 <i class="fas fa-user-secret text-white"></i>
             </div>
             <div class="flex-1">
-                <h3 class="font-bold text-base text-red-100">Limpiador de Huellas</h3>
-                <p class="text-red-400/60 text-[11px] font-medium italic">Borra el rastro digital de tus trabajos</p>
+                <h3 class="font-bold text-base">Limpiador Meta</h3>
+                <p class="text-slate-400 text-[11px] italic font-medium">Modo Invisible</p>
             </div>
-            <div class="bg-slate-800/50 p-2 rounded-full border border-white/5">
-                <i class="fas fa-chevron-right text-slate-500 text-xs"></i>
+            <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+        </a>
+
+        <a href="4-flash-check/index.html" class="glass card-anim p-5 rounded-[2rem] flex items-center shadow-xl block border border-amber-500/10">
+            <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-2xl flex items-center justify-center text-2xl mr-4 shadow-lg shadow-amber-900/40">
+                <i class="fas fa-brain text-black"></i>
+            </div>
+            <div class="flex-1">
+                <h3 class="font-bold text-base text-amber-100">Flash-Check</h3>
+                <p class="text-amber-500/60 text-[11px] italic font-medium">Predictor de Exámenes</p>
+            </div>
+            <div class="bg-amber-500/10 p-1 px-2 rounded-lg">
+                <span class="text-[8px] font-black text-amber-500">NEW</span>
             </div>
         </a>
 
     </div>
 
-    <footer class="mt-16 text-center">
-        <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-6"></div>
-        <p class="text-[10px] text-slate-600 font-bold uppercase tracking-widest leading-relaxed">
+    <footer class="mt-16 text-center opacity-30">
+        <p class="text-[10px] font-bold uppercase tracking-widest leading-relaxed">
             &copy; 2026 Tareas-Express Official<br>
-            Desarrollado para Estudiantes de Élite
+            Secure Academic Resources
         </p>
     </footer>
 
     <script>
-        // Lógica de Instalación PWA
+        // PWA Installation
         let deferredPrompt;
         const installBtn = document.getElementById('installBtn');
 
         window.addEventListener('beforeinstallprompt', (e) => {
-            // Evitar que el navegador muestre el prompt automático
             e.preventDefault();
-            // Guardar el evento para usarlo después
             deferredPrompt = e;
-            // Mostrar nuestro botón personalizado
             installBtn.classList.remove('hidden');
         });
 
         installBtn.addEventListener('click', async () => {
             if (deferredPrompt) {
-                // Mostrar el prompt de instalación
                 deferredPrompt.prompt();
-                // Esperar a la respuesta del usuario
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    console.log('Usuario aceptó la instalación');
-                    installBtn.classList.add('hidden');
-                }
+                if (outcome === 'accepted') installBtn.classList.add('hidden');
                 deferredPrompt = null;
             }
         });
 
-        // Registrar el Service Worker (sw.js)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('SW registrado con éxito:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.log('SW fallo en el registro:', error);
-                    });
+                navigator.serviceWorker.register('sw.js').catch(() => {});
             });
         }
-
-        // Detectar si ya está instalada la App
-        window.addEventListener('appinstalled', () => {
-            installBtn.classList.add('hidden');
-            deferredPrompt = null;
-            console.log('App instalada con éxito');
-        });
     </script>
 </body>
 </html>
