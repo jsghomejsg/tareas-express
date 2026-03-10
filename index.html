@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareas-Express | Herramientas para Estudiantes</title>
+    <title>Tareas-Express | Hub Estudiantes</title>
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,108 +11,72 @@
         body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
         .card-grad { background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); }
-        .card-grad-blue { background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%); }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
-        .float { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
-<body class="p-4 pb-28">
+<body class="p-4">
 
     <header class="flex justify-between items-center mb-8">
         <div>
-            <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-                Tareas-Express
-            </h1>
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Estudiante Pro v1.0</p>
+            <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Tareas-Express</h1>
+            <p class="text-[10px] text-slate-500 font-bold uppercase">Herramientas Premium</p>
         </div>
-        <button id="installBtn" class="hidden bg-white text-slate-900 px-4 py-2 rounded-full text-sm font-black shadow-lg shadow-white/10 active:scale-95 transition-all">
-            <i class="fas fa-download mr-2"></i>Instalar App
+        <button id="installBtn" class="hidden bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-black shadow-lg animate-bounce">
+            <i class="fas fa-download mr-1"></i> INSTALAR APP
         </button>
     </header>
 
-    <div class="flex justify-center mb-8 min-h-[250px]">
+    <div class="flex justify-center mb-8 min-h-[250px] bg-slate-900/50 rounded-2xl items-center border border-dashed border-slate-700">
         <script type="text/javascript">
-            atOptions = {
-                'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
+            atOptions = {'key' : '6879ae15e3c0022ec1df6fe4a4eb64b7','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/6879ae15e3c0022ec1df6fe4a4eb64b7/invoke.js"></script>
     </div>
 
-    <div class="glass p-4 rounded-2xl mb-8 flex items-center border border-white/5">
-        <i class="fas fa-search text-slate-500 mr-3"></i>
-        <input type="text" placeholder="¿Qué necesitas hoy?..." class="bg-transparent border-none outline-none w-full text-white placeholder-slate-600 text-sm">
-    </div>
-
     <div class="grid grid-cols-1 gap-4">
-        
-        <a href="1-apuntes-a-mano/index.html" class="glass p-4 rounded-3xl flex items-center hover:bg-white/5 transition-all border border-white/5">
-            <div class="w-14 h-14 card-grad rounded-2xl flex items-center justify-center text-xl mr-4 shadow-lg shadow-purple-500/20 float">
+        <a href="1-apuntes-a-mano/index.html" class="glass p-4 rounded-3xl flex items-center border border-white/5">
+            <div class="w-12 h-12 card-grad rounded-xl flex items-center justify-center text-xl mr-4 shadow-lg shadow-purple-500/20">
                 <i class="fas fa-pen-nib text-white"></i>
             </div>
             <div class="flex-1">
-                <h3 class="font-bold text-lg">Apuntes a Mano</h3>
-                <p class="text-slate-400 text-xs italic font-medium">ChatGPT a folio real 📝</p>
+                <h3 class="font-bold text-sm">Apuntes a Mano</h3>
+                <p class="text-slate-400 text-[10px] italic">De digital a papel real</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
 
-        <a href="2-humanizador-texto/index.html" class="glass p-4 rounded-3xl flex items-center hover:bg-white/5 transition-all border border-white/5">
-            <div class="w-14 h-14 card-grad-blue rounded-2xl flex items-center justify-center text-xl mr-4 shadow-lg shadow-blue-500/20">
+        <a href="2-humanizador-texto/index.html" class="glass p-4 rounded-3xl flex items-center border border-white/5">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-xl mr-4">
                 <i class="fas fa-user-check text-white"></i>
             </div>
             <div class="flex-1">
-                <h3 class="font-bold text-lg text-white">Humanizador IA</h3>
-                <p class="text-slate-400 text-xs italic font-medium">Bypass detectores 👤</p>
+                <h3 class="font-bold text-sm">Humanizador IA</h3>
+                <p class="text-slate-400 text-[10px] italic">Bypass detectores</p>
             </div>
             <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
         </a>
-
-        <div class="glass p-4 rounded-3xl flex items-center opacity-40 border border-white/5">
-            <div class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center text-xl mr-4">
-                <i class="fas fa-calculator text-slate-500"></i>
-            </div>
-            <div class="flex-1">
-                <h3 class="font-bold text-lg text-slate-500">Calculadora de Notas</h3>
-                <p class="text-slate-600 text-xs font-medium italic">Próximamente...</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed bottom-6 left-6 right-6">
-        <button onclick="shareWS()" class="w-full bg-green-600 p-4 rounded-2xl font-black text-white flex items-center justify-center gap-3 shadow-2xl shadow-green-900/40 active:scale-95 transition-all border-b-4 border-green-800">
-            <i class="fab fa-whatsapp text-xl"></i> ENVIAR A MIS COMPAS
-        </button>
     </div>
 
     <script>
-        // Lógica de Instalación PWA
         let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('installBtn').classList.remove('hidden');
+            // Si el navegador detecta que se puede instalar, mostramos el botón
+            installBtn.classList.remove('hidden');
         });
 
-        document.getElementById('installBtn').addEventListener('click', async () => {
+        installBtn.addEventListener('click', async () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 if (outcome === 'accepted') {
-                    document.getElementById('installBtn').classList.add('hidden');
+                    installBtn.classList.add('hidden');
                 }
                 deferredPrompt = null;
             }
         });
-
-        function shareWS() {
-            const text = "¡Bro, he encontrado esta web para estudiantes! Pasa los apuntes a mano y limpia los textos de la IA. Agrégala a tu móvil: " + window.location.href;
-            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text));
-        }
     </script>
 </body>
 </html>
