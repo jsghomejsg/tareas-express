@@ -1,16 +1,35 @@
 {
-  "name": "Tareas-Express",
-  "short_name": "TareasEx",
-  "description": "Herramientas premium para estudiantes",
+  "name": "Tareas-Express Official",
+  "short_name": "Tareas-Ex",
+  "description": "Kit de Supervivencia: Apuntes a mano, Humanizador, Limpiador y Predictor de Exámenes.",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0f172a",
-  "theme_color": "#7c3aed",
+  "theme_color": "#0f172a",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/5832/5832416.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/5850/5850276.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Apuntes a Mano",
+      "url": "1-apuntes-a-mano/index.html"
+    },
+    {
+      "name": "Humanizador IA",
+      "url": "2-humanizador-texto/index.html"
+    },
+    {
+      "name": "Limpiador Meta",
+      "url": "3-limpiador-huellas/index.html"
+    },
+    {
+      "name": "Flash-Check",
+      "url": "4-flash-check/index.html"
     }
   ]
 }
